@@ -32,6 +32,11 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  goHome() {
+    console.log('Clicked on home');
+    this.router.navigate(['/']);
+  }
+
   logIn() {
     // TODO: Please replace with a service call
     this._authenticateService.login();

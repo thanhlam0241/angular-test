@@ -17,11 +17,9 @@ export class AppLoadingComponent {
   ngOnInit() {
     this.loadingService.loading$.subscribe((loading) => {
       if (loading) {
-        console.log('Loading...');
         this.loading = true;
       } else {
         this.loading = false;
-        console.log('Done loading.');
       }
     });
   }
