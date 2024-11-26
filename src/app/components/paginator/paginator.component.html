@@ -1,0 +1,70 @@
+<div class="flex flex-wrap gap-1.25">
+  <div
+    class="h-8 w-8 mr-1 inline-flex justify-center items-center"
+    [class]="
+      currentPage === 1
+        ? ['opacity-50', 'pointer-events-none', 'cursor-not-allowed']
+        : ['cursor-pointer']
+    "
+    (click)="changePageToFirst($event)"
+  >
+    <<
+  </div>
+  <div
+    class="h-8 w-8 mr-1 inline-flex justify-center items-center"
+    [class]="
+      currentPage === 1
+        ? ['opacity-50', 'pointer-events-none', 'cursor-not-allowed']
+        : ['cursor-pointer']
+    "
+    (click)="changePageToPrev($event)"
+  >
+    <
+  </div>
+  <div
+    *ngFor="let pageLink of pageLinks"
+    (click)="onPageLinkClick($event, pageLink)"
+    [class]="
+      pageLink === currentPage
+        ? ['border-gray-600', 'border-b-2']
+        : ['border-base_experience-0']
+    "
+    class="w-8 inline-flex justify-center items-center cursor-pointer leading-5 ease-in"
+  >
+    {{ pageLink }}
+  </div>
+  <div
+    class="h-8 w-8 ml-1 inline-flex justify-center items-center"
+    [class]="
+      currentPage === lastPage
+        ? ['opacity-50', 'pointer-events-none', 'cursor-not-allowed']
+        : ['cursor-pointer']
+    "
+    (click)="changePageToNext($event)"
+  >
+    >
+  </div>
+  <div
+    class="h-8 w-8 ml-1 inline-flex justify-center items-center"
+    [class]="
+      currentPage === lastPage
+        ? ['opacity-50', 'pointer-events-none', 'cursor-not-allowed']
+        : ['cursor-pointer']
+    "
+    (click)="changePageToLast($event)"
+  >
+    >>
+  </div>
+</div>
+
+<div *ngIf="rowsPerPageOptions.length">
+  <select
+    class="rounded border border-gray-600"
+    [(ngModel)]="rows"
+    (ngModelChange)="onRppChange()"
+  >
+    <option *ngFor="let rpp of rowsPerPageOptions" [value]="rpp">
+      {{ rpp }}
+    </option>
+  </select>
+</div>

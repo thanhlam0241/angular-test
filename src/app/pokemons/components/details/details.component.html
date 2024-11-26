@@ -1,0 +1,22 @@
+<div class="flex gap-4 items-center justify-center">
+  <button [disabled]="!_prevId" (click)="prevId()"><<</button>
+  <pokemon-card [pokemon]="detail"></pokemon-card>
+  <button [disabled]="!_nextId" (click)="nextId()">>></button>
+</div>
+
+<div class="flex w-1/3 px-4 justify-between items-center">
+  <button
+    [disabled]="!detail || statePokemon === StatePokemon.LIKED"
+    class="border border-gray-600 px-4 py-2 rounded disabled:bg-gray-300 disabled:cursor-not-allowed"
+    (click)="like()"
+  >
+    Like
+  </button>
+  <button
+    [disabled]="!detail || statePokemon === StatePokemon.DISLIKED"
+    class="border border-gray-600 px-4 py-2 rounded disabled:bg-gray-300 disabled:cursor-not-allowed"
+    (click)="dislike()"
+  >
+    Dislike
+  </button>
+</div>

@@ -1,0 +1,18 @@
+<table [class.overlay]="isLoading">
+  <thead>
+    <tr>
+      <th class="border-bottom">Name</th>
+      <th class="border-bottom">Detail URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let result of data">
+      <td>
+        <a [routerLink]="['/pokemons', result.id]">{{ result.name }}</a>
+      </td>
+      <td class="border-left">
+        <a [href]="result.url" target="_blank">{{ result.url }}</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

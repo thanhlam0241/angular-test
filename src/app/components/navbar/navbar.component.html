@@ -1,0 +1,10 @@
+<nav>
+  <h4>Angular Challenge</h4>
+  <button *ngIf="isLoggedIn; else notLoggedIn" (click)="logOut()">
+    I am {{ user?.name }}, and I like {{ user?.likes }} and dislike
+    {{ user?.dislikes }} pokemons / Log Out
+  </button>
+  <ng-template #notLoggedIn>
+    <button (click)="logIn()">Log In</button>
+  </ng-template>
+</nav>
