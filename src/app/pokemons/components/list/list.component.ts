@@ -7,6 +7,7 @@ import {
 import { TableComponent } from '@app/components/table/table.component';
 import { BackendService } from '@app/services/backend.service';
 import { CommonModule } from '@angular/common';
+import { debounceTime } from 'rxjs';
 
 import { Pokemon, PaginatedPokemon } from '@app/models/pokemon';
 
@@ -31,7 +32,7 @@ import { Pokemon, PaginatedPokemon } from '@app/models/pokemon';
       type="number"
       class="w-2/4 p-2 rounded border border-gray-600"
       placeholder="Go to page..."
-      [formControl]="query"
+      [formControl]="page"
     />
     <data-table [isLoading]="false" [data]="filteredResults"></data-table>
   `,
@@ -44,6 +45,7 @@ import { Pokemon, PaginatedPokemon } from '@app/models/pokemon';
 })
 export class ListComponent implements OnInit {
   query = new FormControl('');
+  page = new FormControl();
 
   currentPage: number = 1;
   pageSize: number = 10;
@@ -61,6 +63,15 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.getListPokemons();
+
+    // Subscribe to page input changes
+    this.page.valueChanges.pipe(debounceTime(200)).subscribe((value) => {
+      if (value < 1 || value > this.totalRecords) {
+        return;
+      }
+      this.currentPage = value;
+      this.getListPokemons();
+    });
   }
 
   // Fetch pokemons from the backend
